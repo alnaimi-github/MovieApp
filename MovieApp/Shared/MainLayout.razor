@@ -1,0 +1,122 @@
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<div class="row-layout movie-app-container">
+    <IgbNavDrawer Position="NavDrawerPosition.Relative" @ref="_navDrawer" class="nav-drawer" movie_app_view-scope>
+        <IgbNavDrawerItem @onclick="@(e => Navigate("/movies"))">
+            <span slot="icon">
+                <span class="material-icons icon">
+                    movie
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">Movies</div>
+        </IgbNavDrawerItem>
+        <IgbNavDrawerItem @onclick="@(e => Navigate("/movie_complex"))">
+            <span slot="icon">
+                <span class="material-icons icon">
+                    location_on
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">Theatres</div>
+        </IgbNavDrawerItem>
+        <IgbNavDrawerItem @onclick="@(e => Navigate("/my_purchases"))">
+            <span slot="icon">
+                <span class="material-icons icon">
+                    shopping_cart
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">My Purchases</div>
+        </IgbNavDrawerItem>
+        <IgbNavDrawerItem>
+            <span slot="icon">
+                <span class="material-icons icon">
+                    local_offer
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">Promos</div>
+        </IgbNavDrawerItem>
+        <IgbNavDrawerItem>
+            <span slot="icon">
+                <span class="material-icons icon">
+                    help
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">Help &amp; Support</div>
+        </IgbNavDrawerItem>
+        <IgbNavDrawerItem>
+            <span slot="icon">
+                <span class="material-icons icon">
+                    chat_bubble
+                </span>
+                <IgbRipple></IgbRipple>
+            </span>
+            <div slot="content">Contact Us</div>
+        </IgbNavDrawerItem>
+    </IgbNavDrawer>
+    <div class="column-layout group">
+        <div class="row-layout header">
+            <div class="row-layout group_1">
+                <IgbIconButton Variant="IconButtonVariant.Flat" @onclick="@(e => _navDrawer!.ToggleAsync())" class="icon-button" movie_app_view-scope>
+                    <span class="material-icons icon_1">
+                        menu
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </IgbIconButton>
+                <p class="typography__subtitle-1 text">
+                    MOVIE APP
+                </p>
+            </div>
+            <div class="row-layout group_2">
+                <IgbIconButton Variant="IconButtonVariant.Flat" class="icon-button_1" movie_app_view-scope>
+                    <span class="material-icons icon_1">
+                        search
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </IgbIconButton>
+                <IgbIconButton Variant="IconButtonVariant.Flat" class="icon-button_1" movie_app_view-scope>
+                    <span class="material-icons icon_1">
+                        favorite
+                    </span>
+                    <IgbRipple></IgbRipple>
+                </IgbIconButton>
+                <IgbAvatar Src="https://d3cg6cexo8t5ug.cloudfront.net/avatars/avatar8.png" Shape="AvatarShape.Circle" @ref="_avatar" @onclick="@(e => _dropdown!.ToggleAsync(_avatar))" class="avatar" movie_app_view-scope></IgbAvatar>
+                <IgbDropdown @ref="_dropdown" class="dropdown" movie_app_view-scope>
+                    <IgbDropdownItem>
+                        My Profile
+                    </IgbDropdownItem>
+                    <IgbDropdownItem>
+                        Logout
+                    </IgbDropdownItem>
+                </IgbDropdown>
+            </div>
+        </div>
+        <div class="view-container">
+            @Body
+        </div>
+    </div>
+    <IgbExpansionPanel Open="true" class="expansion-panel" movie_app_view-scope>
+        <p class="typography__body-2 text">
+            Body 2
+        </p>
+        <div class="column-layout group_3"></div>
+        <span slot="title">Title goes here...</span>
+        <span slot="subtitle">Subtitle goes here...</span>
+    </IgbExpansionPanel>
+    <div class="group_4"></div>
+</div>
+
+@code {
+    private IgbNavDrawer _navDrawer;
+    private IgbDropdown _dropdown;
+    private IgbAvatar _avatar;
+
+    public void Navigate(string path)
+    {
+        NavigationManager.NavigateTo(path);
+    }
+}

@@ -1,0 +1,189 @@
+@page "/"
+@page "/movies"
+@using MovieAppData
+@using Models.MovieAppData
+@inject IMovieAppDataService MovieAppDataService
+
+<div class="row-layout movies-container">
+    <div class="column-layout group">
+        <h5 class="content">
+            Movie Premieres
+        </h5>
+        <div class="row-layout group_1">
+            <div class="column-layout group_2">
+                <div class="column-layout group_3">
+                    <h5 class="h5_1">
+                        MoviePlex Metropolis
+                    </h5>
+                    <IgbButton DisplayType="ButtonBaseType.Button" class="button button_2" movies-scope>
+                        SHOW SCHEDULE
+                        <IgbRipple></IgbRipple>
+                    </IgbButton>
+                </div>
+            </div>
+        </div>
+        <IgbTabs class="tabs" movies-scope>
+            <IgbTab Selected="true">
+                <span>Now Playing</span>
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content" movies-scope>
+                @foreach (var item in _movieAppDataNowPlaying)
+                {
+                    <IgbCard Outlined="false" class="card" movies-scope>
+                        <IgbCardMedia class="media-content" movies-scope>
+                            <img src="@item.MoviePoster" class="image" />
+                        </IgbCardMedia>
+                        <IgbCardHeader>
+                            <h3 slot="title">
+                                @item.Name
+                            </h3>
+                            <h5 slot="subtitle">
+                                @item.Genre
+                            </h5>
+                        </IgbCardHeader>
+                        <IgbCardContent class="body-content" movies-scope>
+                            <p class="typography__body-1 content">
+                                @item.Description
+                            </p>
+                        </IgbCardContent>
+                        <IgbCardActions class="actions-content" movies-scope>
+                            <IgbButton Variant="ButtonVariant.Flat" DisplayType="ButtonBaseType.Button" slot="start" class="button button_3" movies-scope>
+                                More
+                                <IgbRipple></IgbRipple>
+                            </IgbButton>
+                            <IgbIconButton slot="end" Variant="IconButtonVariant.Flat" class="icon-button" movies-scope>
+                                <span class="material-icons icon">
+                                    favorite
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton slot="end" Variant="IconButtonVariant.Flat" class="icon-button" movies-scope>
+                                <span class="material-icons icon">
+                                    bookmark
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                            <IgbIconButton slot="end" Variant="IconButtonVariant.Flat" class="icon-button" movies-scope>
+                                <span class="material-icons icon">
+                                    share
+                                </span>
+                                <IgbRipple></IgbRipple>
+                            </IgbIconButton>
+                        </IgbCardActions>
+                    </IgbCard>
+                }
+            </IgbTabPanel>
+            <IgbTab Disabled="true">
+                <span>Opening This Week</span>
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content_1" movies-scope>
+                <div class="row-layout demo-content">
+                    <img src="assets/start-building-dark.svg" class="image_1" />
+                    <p class="typography__body-2 text">
+                        Remove the "demo-content" container, and add your own content.
+                    </p>
+                </div>
+            </IgbTabPanel>
+            <IgbTab Disabled="true">
+                <span>Coming Soon</span>
+            </IgbTab>
+            <IgbTabPanel class="row-layout tab-item-content_1" movies-scope>
+                <div class="row-layout demo-content">
+                    <img src="assets/start-building-dark.svg" class="image_1" />
+                    <p class="typography__body-2 text">
+                        Remove the "demo-content" container, and add your own content.
+                    </p>
+                </div>
+            </IgbTabPanel>
+        </IgbTabs>
+    </div>
+    <div class="column-layout group_4">
+        <div class="column-layout buy-tickets">
+            <p class="typography__subtitle-2 title">
+                BUY TICKETS
+            </p>
+            <IgbSelect Outlined="false" Label="Pick a Movie" Placeholder="Select Movie Title" Value="@_value" Change="@(e => _value = e.Detail.Value)" class="select" movies-scope>
+                <span slot="prefix">
+                    <span class="material-icons icon_1">
+                        movie
+                    </span>
+                </span>
+                @foreach (var item in _movieAppDataMovieList)
+                {
+                    <IgbSelectItem Value="1">
+                        @item.Name
+                    </IgbSelectItem>
+                }
+            </IgbSelect>
+            <IgbSelect Outlined="false" Label="Theatres" Placeholder="Select a Movie Complex" Value="@_value" Change="@(e => _value = e.Detail.Value)" class="select" movies-scope>
+                <span slot="prefix">
+                    <span class="material-icons icon_1">
+                        location_on
+                    </span>
+                </span>
+                @foreach (var item in _movieAppDataTheatres)
+                {
+                    <IgbSelectItem Value="1">
+                        @item.Theatres
+                    </IgbSelectItem>
+                }
+            </IgbSelect>
+            <IgbDatePicker Label="Date" Outlined="false" Mode="DatePickerMode.Dialog" class="date-picker" movies-scope></IgbDatePicker>
+            <IgbSelect Outlined="false" Label="Show Time" Value="@_value" Change="@(e => _value = e.Detail.Value)" class="select_1" movies-scope>
+                <span slot="prefix">
+                    <span class="material-icons icon_1">
+                        access_time
+                    </span>
+                </span>
+                @foreach (var item in _movieAppDataShowtimes)
+                {
+                    <IgbSelectItem Value="1">
+                        @item.Showtimes
+                    </IgbSelectItem>
+                }
+            </IgbSelect>
+            <IgbButton DisplayType="ButtonBaseType.Button" class="button button_4" movies-scope>
+                GET TICKETS NOW
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+        <div class="column-layout theatres-near-you">
+            <p class="typography__subtitle-2 text_1">
+                THEATRES NEAR YOU
+            </p>
+            <IgbList class="list" movies-scope>
+                @foreach (var item in _movieAppDataTheatresNearYou)
+                {
+                    <IgbListItem>
+                        <IgbAvatar Initials="@item.Initials" slot="start" Shape="AvatarShape.Circle" class="avatar" movies-scope></IgbAvatar>
+                        <div slot="title">@item.Theatre</div>
+                        <div slot="subtitle">@item.Address</div>
+                    </IgbListItem>
+                }
+            </IgbList>
+            <IgbButton DisplayType="ButtonBaseType.Button" class="button_1 button_1_1" movies-scope>
+                Change Location
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<NowPlayingType> _movieAppDataNowPlaying = new();
+    private string _value = "1";
+    private List<MovieListType> _movieAppDataMovieList = new();
+    private List<TheatresType> _movieAppDataTheatres = new();
+    private List<ShowtimesType> _movieAppDataShowtimes = new();
+    private List<TheatresNearYouType> _movieAppDataTheatresNearYou = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _movieAppDataNowPlaying = await MovieAppDataService.GetNowPlayingList();
+        _movieAppDataMovieList = await MovieAppDataService.GetMovieListList();
+        _movieAppDataTheatres = await MovieAppDataService.GetTheatresList();
+        _movieAppDataShowtimes = await MovieAppDataService.GetShowtimesList();
+        _movieAppDataTheatresNearYou = await MovieAppDataService.GetTheatresNearYouList();
+        await base.OnInitializedAsync();
+    }
+}

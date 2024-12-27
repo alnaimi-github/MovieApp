@@ -1,0 +1,123 @@
+.row-layout {
+    display: flex;
+}
+.movie-app-container {
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+    height: 100%;
+}
+.column-layout {
+    display: flex;
+    flex-direction: column;
+}
+.group {
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+    position: relative;
+    min-width: 50px;
+    min-height: 50px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.header {
+    background-color: #361439;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    position: relative;
+    padding: 12px 20px;
+    height: 70px;
+    min-height: 70px;
+    max-height: 70px;
+    flex-shrink: 0;
+}
+.group_1 {
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    position: relative;
+    min-width: 50px;
+    min-height: 50px;
+    flex-grow: 1;
+}
+.group_2 {
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    gap: 24px;
+    position: relative;
+    min-width: 50px;
+    min-height: 50px;
+}
+.expansion-panel {
+    height: max-content;
+    min-width: 0;
+    min-height: 0;
+    flex-shrink: 0;
+}
+.group_3 {
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+    position: relative;
+    min-width: 50px;
+    min-height: 50px;
+}
+.group_4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: stretch;
+    align-items: stretch;
+    position: relative;
+    min-width: 50px;
+    min-height: 50px;
+}
+.nav-drawer {
+    min-width: min-content;
+    min-height: 0;
+    flex-shrink: 0;
+}
+.view-container {
+    overflow: auto;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    flex-grow: 1;
+}
+.icon-button {
+    margin: 0 8px 0 0;
+}
+.icon-button::part(base) {
+    color: var(--ig-gray-900);
+}
+.icon-button_1::part(base) {
+    color: var(--ig-gray-900);
+}
+.icon {
+    --size: 24px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+.icon_1 {
+    color: var(--ig-gray-900);
+}
+.text {
+    height: max-content;
+    min-width: min-content;
+}
+.avatar::part(base) {
+    background-color: transparent;
+}
+.dropdown {
+    left: 0;
+    top: 0;
+    position: absolute;
+    min-width: min-content;
+}
+.dropdown::part(base) {
+    height: max-content;
+}
